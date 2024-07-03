@@ -41,14 +41,18 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void FixedUpdate(){
-        //Vector2 pos = Camera.main.ScreenToWorldPoint(RectTransformUtility.WorldToScreenPoint(null, target.position);
 
-        Vector2 direction = (target.position - transform.position);
+        Vector2 direction = target.position - transform.position;
         float directionNorm = Mathf.Sqrt( MathF.Pow(direction.x, 2) + Mathf.Pow(direction.y,2) );
         direction.x /= directionNorm;
         direction.y /= directionNorm;
 
+        if (float.IsNaN(direction.x) || float.IsNaN(direction.y)) return;
+
+        Debug.Log(direction * moveSpeed);
+
         rb.velocity = direction * moveSpeed;
+
 
     }
 }

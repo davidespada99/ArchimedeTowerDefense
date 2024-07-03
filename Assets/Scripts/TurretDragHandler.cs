@@ -12,11 +12,26 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
     [SerializeField] private Color validColor = Color.green;
     [SerializeField] private Color invalidColor = Color.red;
 
+    [SerializeField] private int cost = 300;
+
     private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector2 initialPosition;
     private GameObject dragImage;
+
+    void Update(){
+        Image image = gameObject.GetComponent<Image>();
+        Color currentColor = image.color;
+        if(LevelManager.main.currency < cost){
+            currentColor.a = 0.5f;
+            image.color = currentColor;
+        }
+        else{
+            currentColor.a = 1f;
+            image.color = currentColor;
+        }
+    }
 
     private void Awake()
     {
@@ -28,6 +43,9 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+         if(LevelManager.main.currency < cost){
+            return;
+        }
         // Create a new Image GameObject for dragging
         dragImage = new GameObject("DragImage", typeof(Image), typeof(CanvasGroup));
         dragImage.transform.SetParent(canvas.transform, false);
@@ -80,6 +98,7 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
             if (IsValidPlacement(worldPosition))
             {
                 PlaceTurret(worldPosition);
+                LevelManager.main.SpendCurrency(cost);
             }
 
             // Destroy the drag image

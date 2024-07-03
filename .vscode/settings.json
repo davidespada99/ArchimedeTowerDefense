@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ArchimedeTowerDefense.sln"
+    "dotnet.defaultSolution": "ArchimedeTowerDefense.sln",
+    "search.useGlobalIgnoreFiles": false
 }

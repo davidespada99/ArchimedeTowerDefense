@@ -9,26 +9,25 @@ public class Turret : MonoBehaviour
     // Start is called before the first frame update
 
 
-[Header("References")]
-[SerializeField] private Transform turretRotationPoint;
-[SerializeField] private LayerMask enemyMask;
-[SerializeField] private GameObject bulletPrefab;
+    [Header("References")]
+    [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private LayerMask enemyMask;
+    [SerializeField] private GameObject bulletPrefab;
 
-[SerializeField] private Transform firingPoint;
-
-
-[Header("Attributes")]
-
-[SerializeField] private float targetinRange = 3f;
-[SerializeField] private float rotationSpeed = 100f;
-[SerializeField] private float bulletPerSecond = 2f;
+    [SerializeField] private Transform firingPoint;
 
 
-private float timeUnitlFire;
+    [Header("Attributes")]
 
-private Transform target;
+    [SerializeField] private float targetinRange = 3f;
+    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private float bulletPerSecond = 2f;
 
-private void OnDrawGizmosSelected(){
+
+    private float timeUntilFire;
+    private Transform target;
+
+    private void OnDrawGizmosSelected(){
     Handles.color = Color.black;
     Handles.DrawWireDisc(transform.position, transform.forward, targetinRange);
 }
@@ -48,11 +47,11 @@ private void OnDrawGizmosSelected(){
             FindTarget();
             return;
         }else{
-            timeUnitlFire += Time.deltaTime;
+            timeUntilFire += Time.deltaTime;
 
-            if( timeUnitlFire >= (1 / bulletPerSecond) ){
+            if( timeUntilFire >= (1 / bulletPerSecond) ){
                 Shoot();
-                timeUnitlFire = 0f;
+                timeUntilFire = 0f;
             }
         }
         
@@ -85,6 +84,16 @@ private void OnDrawGizmosSelected(){
 
     private void Shoot(){
         Debug.Log("Shoot porco cane");
+
+        //da modificare transform.position --> firingPoint.position
+        GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Bullet bulletScript = bulletObj.GetComponent<Bullet>();
+
+        bulletScript.SetTarget(target);
+
+        
+
+        
     }
 
 }
