@@ -11,9 +11,8 @@ public class SwapperUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Swapper();
+        if ( ScenesManager.swapped ) Swapper();
         
-
     }
 
     private void Swapper()

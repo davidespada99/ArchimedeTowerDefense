@@ -12,7 +12,7 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
     [SerializeField] private Color validColor = Color.green;
     [SerializeField] private Color invalidColor = Color.red;
 
-    [SerializeField] private int cost = 300;
+    [SerializeField] private int cost = 25;
 
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -79,10 +79,6 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
             // Check if the current position is valid
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             bool validPosition = IsValidPlacement(worldPosition);
-
-            // Debug statement to check position validity
-            Debug.Log("Position Valid: " + validPosition);
-
             // Change the color based on validity
             dragImage.GetComponent<Image>().color = validPosition ? validColor : invalidColor;
         }

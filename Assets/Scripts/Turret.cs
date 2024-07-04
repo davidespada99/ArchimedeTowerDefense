@@ -27,10 +27,10 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
     private Transform target;
 
-    private void OnDrawGizmosSelected(){
-    Handles.color = Color.black;
-    Handles.DrawWireDisc(transform.position, transform.forward, targetinRange);
-}
+//     private void OnDrawGizmosSelected(){
+//     Handles.color = Color.black;
+//     Handles.DrawWireDisc(transform.position, transform.forward, targetinRange);
+// }
 
 
 

@@ -14,6 +14,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float bulletSpeed = 5f;
     [SerializeField] private int bulletDamage = 1;
     private Transform target;
+    private float aliveTime;
+
+    private void Start(){
+        aliveTime = 0f;
+    }
 
     void FixedUpdate()
     {
@@ -25,6 +30,15 @@ public class Bullet : MonoBehaviour
         direction.y /= directionNorm;
 
         rb.velocity = direction * bulletSpeed;
+       
+
+    }
+
+    private void Update(){
+         aliveTime += Time.deltaTime;
+        if( aliveTime >= 1f ){
+            Destroy(gameObject);
+        }
     }
 
     public void SetTarget(Transform _target){

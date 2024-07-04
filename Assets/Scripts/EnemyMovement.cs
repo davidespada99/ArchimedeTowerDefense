@@ -11,6 +11,7 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private int damageDealt = 1;
 
     private Transform target;
     private int pathIndex = 0;
@@ -31,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
             if(pathIndex == LevelManager.main.path.Length){
                 EnemySpawner.onEnemydestroy.Invoke();
                 Destroy(gameObject);
+                LevelManager.main.DecreaseLife(damageDealt);
                 return;
             }
             else{
@@ -48,8 +50,6 @@ public class EnemyMovement : MonoBehaviour
         direction.y /= directionNorm;
 
         if (float.IsNaN(direction.x) || float.IsNaN(direction.y)) return;
-
-        Debug.Log(direction * moveSpeed);
 
         rb.velocity = direction * moveSpeed;
 

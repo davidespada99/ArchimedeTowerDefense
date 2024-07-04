@@ -7,9 +7,16 @@ public class ScenesManager : MonoBehaviour
 {   
 
     public static ScenesManager instance;
+    public static bool swapped = false;
+
     public enum Scenes{
         MainMenu,
         Level01
+    }
+
+
+    public bool IsSwapped(){
+        return swapped;
     }
 
     private void Awake(){
@@ -33,10 +40,8 @@ public class ScenesManager : MonoBehaviour
          SceneManager.LoadScene(scene);
     }
 
-    public void Foo(){
-        Debug.Log("GAY!!!");
+    public void Swap(){
+        swapped = !swapped;
     }
-
-
 
 }
