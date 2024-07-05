@@ -44,4 +44,8 @@ public class ScenesManager : MonoBehaviour
         swapped = !swapped;
     }
 
+    public void Quit(){
+        Application.Quit();
+    }
+
 }

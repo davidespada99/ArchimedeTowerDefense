@@ -49,9 +49,6 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastSpawn = 0f;
         }
 
-        Debug.Log("Enemies ALIVE" + enemiesAlive);
-        Debug.Log("Enemies LEFT" + enemiesLeftToSpawn);
-
         if(enemiesAlive == 0 && enemiesLeftToSpawn == 0){
             EndWave();
         }

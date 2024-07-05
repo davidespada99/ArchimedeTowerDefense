@@ -83,8 +83,6 @@ public class Turret : MonoBehaviour
     }
 
     private void Shoot(){
-        Debug.Log("Shoot porco cane");
-
         //da modificare transform.position --> firingPoint.position
         GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();

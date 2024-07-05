@@ -146,7 +146,7 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.CompareTag("Shop"))
+            if (result.gameObject.CompareTag("Shop") || result.gameObject.CompareTag("Path"))
             {
                 return true;
             }
