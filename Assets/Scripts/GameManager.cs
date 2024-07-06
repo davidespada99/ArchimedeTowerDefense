@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] TextMeshProUGUI currencyUI;
-    [SerializeField] TextMeshProUGUI lifeUI;
-    [SerializeField] TextMeshProUGUI WavesUI;
+
+    public static GameManager main;
+
     
-    void OnGUI(){
-        currencyUI.text = LevelManager.main.currency.ToString();
-        lifeUI.text = LevelManager.main.life.ToString();   
-        WavesUI.text = LevelManager.main.waves.ToString();
+
+    private void Awake(){
+        main = this;
+    }
+
+    void Start()
+    {
+        
+    }
+
+    void Update()
+    {
+        
     }
 }

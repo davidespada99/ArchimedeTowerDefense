@@ -9,6 +9,8 @@ public class ScenesManager : MonoBehaviour
     public static ScenesManager instance;
     public static bool swapped = false;
 
+    public static bool sound = true;
+
     public enum Scenes{
         MainMenu,
         Level01
@@ -19,21 +21,13 @@ public class ScenesManager : MonoBehaviour
         return swapped;
     }
 
+    public bool IsSound(){
+        return sound;
+    }
+
     private void Awake(){
         if(instance != null) return;
         instance = this;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void LoadScene(int scene){
@@ -42,6 +36,10 @@ public class ScenesManager : MonoBehaviour
 
     public void Swap(){
         swapped = !swapped;
+    }
+
+    public void SwitchSound(){
+        sound = !sound;
     }
 
     public void Quit(){

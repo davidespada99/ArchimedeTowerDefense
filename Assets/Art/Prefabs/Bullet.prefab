@@ -165,7 +165,6 @@ MonoBehaviour:
   rb: {fileID: 5261556527647897017}
   bulletSpeed: 12
   bulletDamage: 1
-  explosionSound: {fileID: 8300000, guid: bc9d111b4cfd10043848ee02555c69ec, type: 3}
 --- !u!82 &-7899254034645858043
 AudioSource:
   m_ObjectHideFlags: 0
@@ -173,7 +172,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3831296894340722551}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: bc9d111b4cfd10043848ee02555c69ec, type: 3}

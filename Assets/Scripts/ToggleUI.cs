@@ -21,6 +21,8 @@ public class ToggleUI : MonoBehaviour
     public float t = 0.0f;
     private bool switching = false;
 
+    [SerializeField] private int settingID;
+
 
     public void Awake()
     {
@@ -29,7 +31,7 @@ public class ToggleUI : MonoBehaviour
         handleSize = handleTransform.sizeDelta.x;
         float toggleSizeX = toggle.sizeDelta.x;
         onPosX = (toggleSizeX / 2) - (handleSize / 2);
-        offPosX = onPosX * 1;
+        offPosX = onPosX * handleOffset ;
     }
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,7 @@ public class ToggleUI : MonoBehaviour
         {
             StartToggleing(isOn);
         }
+
     }
 
     private void StartToggleing(bool tStatus)
@@ -94,9 +97,31 @@ public class ToggleUI : MonoBehaviour
             t = 0.0f;
             switch (isOn)
             {
-                case true: isOn = false;
+                case true: 
+                    isOn = false;
+                    //sound
+                    if(settingID == 0) {
+                        Debug.Log("sound off");
+                        SoundManager.Instance.PauseSound();
+                    }
+                    //hand
+                    if(settingID == 1){
+                        ScenesManager.swapped = true;
+                        Debug.Log("ScenesManager.swapped" + ScenesManager.swapped);
+                    }
                     break;
-                case false: isOn = true;
+                case false: 
+                    isOn = true;
+                    //sound
+                    if(settingID == 0) {
+                        Debug.Log("sound on");
+                        SoundManager.Instance.PlaySound();
+                    }
+                    //hand
+                    if(settingID == 1){
+                        ScenesManager.swapped = false;
+                        Debug.Log("ScenesManager.swapped" + ScenesManager.swapped);
+                    }
                     break;
             }
         }

@@ -62,3 +62,6 @@ TagManager:
   - name: Icons
     uniqueID: 3508813435
     locked: 0
+  - name: PausePanel
+    uniqueID: 1956191169
+    locked: 0

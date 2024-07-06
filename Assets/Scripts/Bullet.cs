@@ -15,16 +15,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] private int bulletDamage = 1;
     private Transform target;
     private float aliveTime;
-    public AudioClip explosionSound; // Drag your explosion sound here in the Inspector
-    private AudioSource audioSource;
-
     private void Start(){
         aliveTime = 0f;
-
-         // Get the AudioSource component attached to this game object
-        audioSource = GetComponent<AudioSource>();
-        // Ensure the explosionSound is set in the AudioSource
-        audioSource.clip = explosionSound;
     }
 
     void FixedUpdate()
@@ -54,8 +46,8 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other){
 
-        // Play the explosion sound
-        audioSource.Play();
+
+        SoundManager.Instance.PlayEffects("Explosion");
 
         other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
         Destroy(gameObject);
