@@ -5,10 +5,12 @@ using UnityEngine;
 public class PauseManager : MonoBehaviour
 {
     public GameObject PauseMenu;
+    public GameObject Mask;
 
     public void Pause()
     {
         PauseMenu.SetActive(true);
+        Mask.SetActive(true);
         Time.timeScale = 0; // Pauses the game
         Debug.Log("pause");
     }
@@ -16,6 +18,7 @@ public class PauseManager : MonoBehaviour
     public void Continue()
     {
         PauseMenu.SetActive(false);
+        Mask.SetActive(false);
         Time.timeScale = 1; // Resumes the game
     }
 

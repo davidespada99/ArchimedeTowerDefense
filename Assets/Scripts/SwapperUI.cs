@@ -17,7 +17,6 @@ public class SwapperUI : MonoBehaviour
 
     private void Swapper()
     {
-        Vector2 mapAnchors = mapTransform.anchoredPosition;
         Vector2 mapPivot = mapTransform.pivot;
         Vector2 mapPosition = mapTransform.position;
 

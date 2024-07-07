@@ -5,10 +5,11 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour{
 
 public static LevelManager main;
-
-
 public Transform startPoint;
 public Transform[] path;
+
+public GameOverManager GameOverManager;
+
 
 [Header("Attributes")]
 [SerializeField] public int currency = 50;
@@ -39,7 +40,10 @@ public Transform[] path;
             return true;
         }
         else{
-            Debug.Log("GAME LOST");
+            //Time.timeScale = 0;
+            life = 0;
+            Debug.Log("GAME OVER");
+            GameOverManager.GameOver();
             return false;
         }
     }
@@ -59,6 +63,7 @@ public Transform[] path;
             return false;
         }
     }
+
 
 
 

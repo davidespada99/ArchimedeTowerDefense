@@ -62,6 +62,12 @@ TagManager:
   - name: Icons
     uniqueID: 3508813435
     locked: 0
+  - name: Mask
+    uniqueID: 60013177
+    locked: 0
   - name: PausePanel
     uniqueID: 1956191169
+    locked: 0
+  - name: GameOverPanel
+    uniqueID: 3428974829
     locked: 0
