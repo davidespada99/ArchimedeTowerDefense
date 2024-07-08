@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,9 @@ public class ScenesManager : MonoBehaviour
 {   
 
     public static ScenesManager instance;
-    public static bool swapped = false;
+    public static bool swapped ;
+    public static bool sound ;
 
-    public static bool sound = true;
 
     public enum Scenes{
         MainMenu,
@@ -25,9 +26,20 @@ public class ScenesManager : MonoBehaviour
         return sound;
     }
 
+    void Start(){
+       
+    }
+
     private void Awake(){
+
         if(instance != null) return;
         instance = this;
+        UpdateCaches();
+    }
+
+    public void UpdateCaches(){
+       
+
     }
 
     public void LoadScene(int scene){

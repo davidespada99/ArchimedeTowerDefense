@@ -66,7 +66,7 @@ public class Turret : MonoBehaviour
     private void RotateTowardsTarget(){
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
 
-        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
+        Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle - 140f));
         turretRotationPoint.rotation = Quaternion.RotateTowards(turretRotationPoint.rotation, targetRotation,rotationSpeed * Time.deltaTime);
     }
 
@@ -84,13 +84,10 @@ public class Turret : MonoBehaviour
 
     private void Shoot(){
         //da modificare transform.position --> firingPoint.position
-        GameObject bulletObj = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bulletObj = Instantiate(bulletPrefab, firingPoint.position, Quaternion.identity);
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
 
         bulletScript.SetTarget(target);
-
-        
-
         
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ToggleUI : MonoBehaviour
 {
-    public bool isOn;
+    public static bool[] isOn = {true, true};
 
     public GameObject handle;
     private RectTransform handleTransform;
@@ -26,6 +26,7 @@ public class ToggleUI : MonoBehaviour
 
     public void Awake()
     {
+        
         handleTransform = handle.GetComponent<RectTransform>();
         
         handleSize = handleTransform.sizeDelta.x;
@@ -34,9 +35,14 @@ public class ToggleUI : MonoBehaviour
         offPosX = onPosX * handleOffset ;
     }
     // Start is called before the first frame update
+
     void Start()
     {
-        if (isOn)
+         
+
+        
+
+        if (isOn[settingID])
         {
             handleTransform.localPosition = new Vector3(onPosX, 0, 0);
             onIcon.gameObject.SetActive(true);
@@ -54,9 +60,10 @@ public class ToggleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("For SettingID " + settingID+ ": isOn: "+ isOn);
         if (switching)
         {
-            StartToggleing(isOn);
+            StartToggleing(isOn[settingID]);
         }
 
     }
@@ -95,10 +102,10 @@ public class ToggleUI : MonoBehaviour
         {
             switching = false;
             t = 0.0f;
-            switch (isOn)
+            switch (isOn[settingID])
             {
                 case true: 
-                    isOn = false;
+                    isOn[settingID] = false;
                     //sound
                     if(settingID == 0) {
                         Debug.Log("sound off");
@@ -111,7 +118,7 @@ public class ToggleUI : MonoBehaviour
                     }
                     break;
                 case false: 
-                    isOn = true;
+                    isOn[settingID] = true;
                     //sound
                     if(settingID == 0) {
                         Debug.Log("sound on");

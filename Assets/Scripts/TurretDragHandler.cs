@@ -157,6 +157,8 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     private void PlaceTurret(Vector2 position)
     {
-        Instantiate(turretPrefab, position, Quaternion.identity);
+        GameObject newObject =  Instantiate(turretPrefab, position, Quaternion.identity);  // instatiate the object
+        newObject.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f); // change its local scale in x y z format
+        
     }
 }
