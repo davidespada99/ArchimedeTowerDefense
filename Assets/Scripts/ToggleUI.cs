@@ -135,6 +135,7 @@ public class ToggleUI : MonoBehaviour
     }
     public void Switch()
     {
+        SoundManager.Instance.PlayEffects("Button_Sound");
         switching = true;
     }
 }

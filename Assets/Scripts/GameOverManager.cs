@@ -17,8 +17,8 @@ public void GameOver()
 }
 
 public void Home(){
+    SoundManager.Instance.PlayEffects("Button_Sound");
     Time.timeScale = 1;
-    
     ScenesManager.instance.LoadScene(0);
 }
 

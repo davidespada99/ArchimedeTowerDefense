@@ -17,23 +17,42 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float enemiesPerSecond = 0.5f;
     [SerializeField] private float timeBetweenWaves = 5f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
+     [SerializeField] private float SpawningSpeedScalingFactor = 0.1f;
 
     [Header ("Events")]
     public static UnityEvent onEnemydestroy = new UnityEvent();
 
+     private Coroutine coroutine;
+     private Coroutine startWaveCoroutine;
+     private Coroutine runTutorialCoroutine;
+
+    public static bool isFirstEnemySpawned = false;
     private int currentWave = 1;
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
 
+    private static bool isFirstEnemyKilled = false;
+    private static bool isFirstWaveEnded = false;
     private bool isSpawning = false;
 
     private void Start(){
-        StartCoroutine(StartWave());
+        coroutine = StartCoroutine(StartWave());
     }
 
     private void Awake(){
         onEnemydestroy.AddListener(EnemyDestroyed);
+    }
+
+    public static void SetisFirstWaveEnded(bool b){
+        isFirstWaveEnded = b;
+    }
+    public static void SetisFirstEnemyKilled(bool b){
+        isFirstEnemyKilled = b;
+    }
+
+    public static bool GetisFirstEnemyKilled(){
+        return isFirstEnemyKilled;
     }
 
 
@@ -43,6 +62,7 @@ public class EnemySpawner : MonoBehaviour
 
         timeSinceLastSpawn += Time.deltaTime;
         if(timeSinceLastSpawn >= (1f / enemiesPerSecond) && enemiesLeftToSpawn > 0){
+            Debug.Log("SPAWNING ENEMY ON WAVE: " + currentWave + " LEFT TO SPWAN: " + enemiesLeftToSpawn);
             SpawnEnemy();
             enemiesLeftToSpawn--;
             enemiesAlive++;
@@ -50,6 +70,13 @@ public class EnemySpawner : MonoBehaviour
         }
 
         if(enemiesAlive == 0 && enemiesLeftToSpawn == 0){
+             if(currentWave == 1){
+                    if(!isFirstWaveEnded){
+                         TutorialManager.instance.RunTutorialStep();
+                         isFirstWaveEnded = true;   
+                    }
+                   
+                }
             EndWave();
         }
     }
@@ -64,9 +91,44 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
+        if(LevelManager.main == null) return;
         System.Random rnd = new System.Random();
         GameObject prefabToSpwan = enemyPrefabs[rnd.Next(0, enemyPrefabs.Length)];
         Instantiate(prefabToSpwan, LevelManager.main.startPoint.position, Quaternion.identity);
+        if (!isFirstEnemySpawned){
+            runTutorialCoroutine = StartCoroutine(PauseAfterEnemySpawn(0.25f)); 
+            isFirstEnemySpawned = true;
+        }
+    }
+
+    private IEnumerator PauseAfterEnemySpawn(float delay){
+        yield return new WaitForSeconds(delay); 
+        TutorialManager.instance.RunTutorialStep(); 
+
+    }
+
+    private void OnDestroy()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+        if (startWaveCoroutine != null)
+        {
+            StopCoroutine(startWaveCoroutine);
+        }
+        if (runTutorialCoroutine != null)
+        {
+            StopCoroutine(runTutorialCoroutine);
+        }
+         // Reset static variables
+        isFirstEnemySpawned = false;
+        isFirstWaveEnded = false;
+        isSpawning = false;
+        currentWave = 1;
+
+        
+
     }
 
     private IEnumerator StartWave()
@@ -75,6 +137,7 @@ public class EnemySpawner : MonoBehaviour
 
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
+        enemiesPerSecond = enemiesPerSecond + SpawningSpeedScalingFactor;
         LevelManager.main.IncreaseWaves();
     }
 
@@ -83,7 +146,7 @@ public class EnemySpawner : MonoBehaviour
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
-        StartCoroutine(StartWave());
+        startWaveCoroutine = StartCoroutine(StartWave());
 
     }
 

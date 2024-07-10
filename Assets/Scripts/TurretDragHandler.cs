@@ -14,6 +14,9 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     [SerializeField] private int cost = 25;
 
+    private static bool firstTurretPlaced = false;
+
+
     private Canvas canvas;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -24,13 +27,17 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
         Image image = gameObject.GetComponent<Image>();
         Color currentColor = image.color;
         if(LevelManager.main.currency < cost){
-            currentColor.a = 0.5f;
+            currentColor.a = 0.2f;
             image.color = currentColor;
         }
         else{
             currentColor.a = 1f;
             image.color = currentColor;
         }
+    }
+
+    public static void setFirstTurretPlace(bool b){
+        firstTurretPlaced = b;
     }
 
     private void Awake()
@@ -43,9 +50,24 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-         if(LevelManager.main.currency < cost){
+        Debug.Log("firstTurretPlaced?: " + firstTurretPlaced + "TutorialManager.firstTurretCanBePlaced: " + TutorialManager.firstTurretCanBePlaced);
+         if(LevelManager.main.currency < cost || !TutorialManager.firstTurretCanBePlaced){
             return;
         }
+
+        if (!firstTurretPlaced){
+            if(!ScenesManager.instance.IsSwapped()){
+                TutorialPanelManager.instance.ToggleTutorialHand(0);
+                TutorialPanelManager.instance.ToggleTutorialHand(2); 
+            }else{
+                TutorialPanelManager.instance.ToggleTutorialHand(1);
+                TutorialPanelManager.instance.ToggleTutorialHand(3);
+            }
+
+
+                    
+                   
+                }
         // Create a new Image GameObject for dragging
         dragImage = new GameObject("DragImage", typeof(Image), typeof(CanvasGroup));
         dragImage.transform.SetParent(canvas.transform, false);
@@ -95,6 +117,18 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 PlaceTurret(worldPosition);
                 LevelManager.main.SpendCurrency(cost);
+                if (!firstTurretPlaced){
+                    BlinkHandler.instance.ToggleBlink(3);
+                    TutorialManager.instance.ResumeGame();
+                    TutorialPanelManager.instance.ToggleTutorialPanel(1);
+                    if(!ScenesManager.instance.IsSwapped()){
+                        TutorialPanelManager.instance.ToggleTutorialHand(2); 
+                    }else{
+                        TutorialPanelManager.instance.ToggleTutorialHand(3);
+                    }
+                   
+                }
+                firstTurretPlaced = true;
             }
 
             // Destroy the drag image

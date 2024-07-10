@@ -9,28 +9,25 @@ public class Health : MonoBehaviour
     [SerializeField] private int hitPoints = 1;
     [SerializeField] private int currencyWorth = 1;
 
-    private bool isDestroyed = false;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public int GetHitPoints(){
+        return hitPoints;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    
+    public void SetHitPoints(int _hitPoints){
+        hitPoints = _hitPoints;
     }
-
     public void TakeDamage(int dmg){
         hitPoints -= dmg;
 
         if(hitPoints <= 0) {
             EnemySpawner.onEnemydestroy.Invoke();
-            LevelManager.main.IncreaseCurrency(currencyWorth);
-            isDestroyed = true;
-
+            LevelManager.main.IncreaseCurrency(currencyWorth);  
+            if(!EnemySpawner.GetisFirstEnemyKilled()){
+                TutorialManager.instance.RunTutorialStep();
+                EnemySpawner.SetisFirstEnemyKilled(true);
+            }
+            
             Destroy(gameObject);
         }
     }

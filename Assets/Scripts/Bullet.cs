@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other){
-        SoundManager.Instance.PlayEffects("Explosion");
+        SoundManager.Instance.PlayEffects("Shot");
         other.gameObject.GetComponent<Health>().TakeDamage(bulletDamage);
         Destroy(gameObject);
     }

@@ -43,19 +43,29 @@ public class ScenesManager : MonoBehaviour
     }
 
     public void LoadScene(int scene){
+        Time.timeScale = 1f;
          SceneManager.LoadScene(scene);
+         SoundManager.Instance.PlayEffects("Button_Sound");
     }
 
     public void Swap(){
         swapped = !swapped;
+        SoundManager.Instance.PlayEffects("Button_Sound");
     }
 
     public void SwitchSound(){
         sound = !sound;
+        
     }
 
     public void Quit(){
         Application.Quit();
+        SoundManager.Instance.PlayEffects("Button_Sound");
+    }
+
+    // Play button sound for buttons that needs it
+    public void ButtonSoundHelper(){
+        SoundManager.Instance.PlayEffects("Button_Sound");
     }
 
 }

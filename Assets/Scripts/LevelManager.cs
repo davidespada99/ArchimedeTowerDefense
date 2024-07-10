@@ -12,19 +12,40 @@ public GameOverManager GameOverManager;
 
 
 [Header("Attributes")]
-[SerializeField] public int currency = 50;
-[SerializeField] public int life = 100;
-[SerializeField] public int waves = 0;
+[SerializeField] public int currency;
+[SerializeField] public int life;
+[SerializeField] public int waves;
 
     private void Awake(){
-        main = this;
+        Debug.Log("AWAKE LEVEL MANAGER");
+         if (main == null)
+        {
+            
+            main = this;
+           
+            Time.timeScale = 1f;
+        }
+        else if (main != this)
+        {
+            Destroy(gameObject);
+        }
+        
     }
 
     void Start(){
-        currency = 50;
+        currency = 90;
         life = 100;
         waves = 0;
+
+        StartCoroutine(PauseAfterEnemySpawn(0.1f));
     }
+
+    private IEnumerator PauseAfterEnemySpawn(float delay){
+        yield return new WaitForSeconds(delay); 
+        TutorialManager.instance.RunTutorialStep(); 
+
+    }
+
 
     public void IncreaseWaves(){
         waves += 1;

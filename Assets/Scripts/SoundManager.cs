@@ -35,6 +35,16 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void PlayEffects(string name){
+    Sound s = Array.Find(effectsSounds, x => x.name == name);
+
+    if (s == null) Debug.Log("Not Found"); 
+    else{
+        effectsSource.clip = s.clip;
+        effectsSource.PlayOneShot(s.clip);
+    }
+}
+
     public void PauseSound(){
         AudioListener.pause = true;
     }
@@ -44,14 +54,6 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void PlayEffects(string name){
-        Sound s = Array.Find(effectsSounds, x => x.name == name);
 
-        if (s == null) Debug.Log("Not Found"); 
-        else{
-            effectsSource.clip = s.clip;
-            effectsSource.PlayOneShot(s.clip);
-        }
-    }
 
 }
