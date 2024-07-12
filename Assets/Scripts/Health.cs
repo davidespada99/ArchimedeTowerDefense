@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Health : MonoBehaviour
 {
 
     [Header("Attributes")]
-    [SerializeField] private int hitPoints = 1;
-    [SerializeField] private int currencyWorth = 1;
+    [SerializeField] private int hitPoints;
+    [SerializeField] private int currencyWorth;
 
+    private void Start(){
+        hitPoints = (int)Math.Floor((float)hitPoints + Math.Log(LevelManager.main.GetCurrentWave()));  
+    }
 
     public int GetHitPoints(){
         return hitPoints;

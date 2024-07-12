@@ -325,9 +325,9 @@ MonoBehaviour:
     m_Bits: 128
   bulletPrefab: {fileID: 3831296894340722551, guid: 3125e5fe2d36c4242805bc9cd2965682, type: 3}
   firingPoint: {fileID: 1483981034645597980}
-  targetinRange: 5
+  targetinRange: 6
   rotationSpeed: 600
-  bulletPerSecond: 2.7
+  bulletPerSecond: 2.2
 --- !u!1 &7545740999769746418
 GameObject:
   m_ObjectHideFlags: 0

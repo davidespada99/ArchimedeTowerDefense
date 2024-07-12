@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
      private Coroutine runTutorialCoroutine;
 
     public static bool isFirstEnemySpawned = false;
-    private int currentWave = 1;
+    private int currentWave;
     private float timeSinceLastSpawn;
     private int enemiesAlive;
     private int enemiesLeftToSpawn;
@@ -35,8 +35,9 @@ public class EnemySpawner : MonoBehaviour
     private static bool isFirstEnemyKilled = false;
     private static bool isFirstWaveEnded = false;
     private bool isSpawning = false;
-
+ 
     private void Start(){
+        currentWave = LevelManager.main.GetCurrentWave();
         coroutine = StartCoroutine(StartWave());
     }
 
@@ -125,7 +126,7 @@ public class EnemySpawner : MonoBehaviour
         isFirstEnemySpawned = false;
         isFirstWaveEnded = false;
         isSpawning = false;
-        currentWave = 1;
+        LevelManager.main.ResetCurrentWave();
 
         
 
@@ -134,7 +135,7 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator StartWave()
     {
         yield return new WaitForSeconds(timeBetweenWaves);
-
+        currentWave = LevelManager.main.GetCurrentWave();
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
         enemiesPerSecond = enemiesPerSecond + SpawningSpeedScalingFactor;
@@ -145,7 +146,8 @@ public class EnemySpawner : MonoBehaviour
     {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
-        currentWave++;
+        LevelManager.main.IncreaseCurrentWave();
+        currentWave = LevelManager.main.GetCurrentWave();
         startWaveCoroutine = StartCoroutine(StartWave());
 
     }

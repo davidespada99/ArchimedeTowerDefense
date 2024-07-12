@@ -16,6 +16,21 @@ public GameOverManager GameOverManager;
 [SerializeField] public int life;
 [SerializeField] public int waves;
 
+private int currentWave = 1;
+
+
+public void ResetCurrentWave(){
+        currentWave = 1;
+    }
+
+public void IncreaseCurrentWave(){
+        currentWave++;
+    }
+
+public int GetCurrentWave(){
+        return currentWave;
+    }
+
     private void Awake(){
         Debug.Log("AWAKE LEVEL MANAGER");
          if (main == null)
@@ -33,7 +48,7 @@ public GameOverManager GameOverManager;
     }
 
     void Start(){
-        currency = 90;
+        currency = 80;
         life = 100;
         waves = 0;
 
