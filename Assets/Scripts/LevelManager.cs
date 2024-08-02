@@ -44,6 +44,8 @@ public int GetCurrentWave(){
         {
             Destroy(gameObject);
         }
+
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;  
         
     }
 

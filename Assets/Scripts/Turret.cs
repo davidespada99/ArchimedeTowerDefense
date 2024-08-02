@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using System;
 public class Turret : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -27,10 +27,13 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
     private Transform target;
 
+    private int cost;
+
 //     private void OnDrawGizmosSelected(){
 //     Handles.color = Color.black;
 //     Handles.DrawWireDisc(transform.position, transform.forward, targetinRange);
 // }
+
 
 
 
@@ -62,6 +65,9 @@ public class Turret : MonoBehaviour
         }
     }
 
+    public void SetCost(int cost){
+        this.cost = cost;
+    }
         
     private void RotateTowardsTarget(){
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -88,7 +94,20 @@ public class Turret : MonoBehaviour
         Bullet bulletScript = bulletObj.GetComponent<Bullet>();
 
         bulletScript.SetTarget(target);
+    }
+
+    void OnMouseDown()
+    {
+        // Perform your action here
+        Debug.Log("My turret cost is " + cost + ". I will sell it for " + cost/2);
+
+        LevelManager.main.IncreaseCurrency( (int)(cost / 2));
+        Destroy(gameObject);   
+        // Example action: move the object
+        // transform.position = new Vector3(0, 10, 0);
         
+        // Example action: play a sound
+        // GetComponent<AudioSource>().Play();
     }
 
 }

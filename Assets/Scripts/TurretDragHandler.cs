@@ -12,7 +12,7 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
     [SerializeField] private Color validColor = Color.green;
     [SerializeField] private Color invalidColor = Color.red;
 
-    [SerializeField] private int cost = 25;
+    [SerializeField] private int cost;
 
     private static bool firstTurretPlaced = false;
 
@@ -50,7 +50,6 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        Debug.Log("firstTurretPlaced?: " + firstTurretPlaced + "TutorialManager.firstTurretCanBePlaced: " + TutorialManager.firstTurretCanBePlaced);
          if(LevelManager.main.currency < cost || !TutorialManager.firstTurretCanBePlaced){
             return;
         }
@@ -129,6 +128,17 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
                    
                 }
                 firstTurretPlaced = true;
+            }else{
+                if (!firstTurretPlaced){
+                    if(!ScenesManager.instance.IsSwapped()){
+                        TutorialPanelManager.instance.ToggleTutorialHand(0);
+                        TutorialPanelManager.instance.ToggleTutorialHand(2); 
+                    }else{
+                        TutorialPanelManager.instance.ToggleTutorialHand(1);
+                        TutorialPanelManager.instance.ToggleTutorialHand(3);
+                
+                    }   
+                }
             }
 
             // Destroy the drag image
@@ -192,7 +202,10 @@ public class TurretDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler,
     private void PlaceTurret(Vector2 position)
     {
         GameObject newObject =  Instantiate(turretPrefab, position, Quaternion.identity);  // instatiate the object
+        Turret t = newObject.GetComponent<Turret>();
+        t.SetCost(cost);
         newObject.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f); // change its local scale in x y z format
         
     }
+    
 }
