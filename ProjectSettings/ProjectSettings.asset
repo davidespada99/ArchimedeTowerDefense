@@ -903,7 +903,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -923,11 +929,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: d6263d2f-4b78-4468-ac48-2382789b249e
+  cloudProjectId: 4f1ccba1-dc99-44d9-a2e5-3da1e77039a2
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Archimede Tower Defense
-  organizationId: unity_b2b30a4fc721f3e1505a
+  projectName: Archimede Tower Defense (1)
+  organizationId: mircoloo
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

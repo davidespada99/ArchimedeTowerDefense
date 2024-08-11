@@ -10,7 +10,7 @@ public class TutorialPanelManager : MonoBehaviour
     public GameObject[] TutorialPanels;
 
     public GameObject[] ContinueButtons;
-
+    
     public GameObject[] Hands;
     // Start is called before the first frame update
 

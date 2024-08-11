@@ -8,6 +8,9 @@ public class TutorialManager : MonoBehaviour
     public static TutorialManager instance;
 
     public static bool firstTurretCanBePlaced = false;
+
+    public static bool firstTurretClicked = false;
+
     public static bool runTutorial = true;
     private int state = 0;
     // Start is called before the first frame update
@@ -39,6 +42,7 @@ public class TutorialManager : MonoBehaviour
         state = 0;
         runTutorial = true;
         firstTurretCanBePlaced = false;
+        firstTurretClicked = false;
         Debug.Log("RESET TUTORIAL - state: " + state + " - runTutorial: " + runTutorial );
 
     }
@@ -51,14 +55,14 @@ public class TutorialManager : MonoBehaviour
         state++;
 
         switch(state){
-            case 1: BlinkHandler.instance.ToggleBlink(0);
+            case 1: BlinkHandler.instance.ToggleBlink(0); // Blink the health
             if(!ScenesManager.instance.IsSwapped()){
                 TutorialPanelManager.instance.ToggleTutorialHand(4);
             }else{
                 TutorialPanelManager.instance.ToggleTutorialHand(5);
             }
             break;
-            case 3: BlinkHandler.instance.ToggleBlink(1);    
+            case 3: BlinkHandler.instance.ToggleBlink(1);    //Blink the coin
             if(!ScenesManager.instance.IsSwapped()){
                 TutorialPanelManager.instance.ToggleTutorialHand(6);
             }else{
@@ -66,12 +70,16 @@ public class TutorialManager : MonoBehaviour
             } 
             break;
             
-            case 4: BlinkHandler.instance.ToggleBlink(2); 
+            case 4: BlinkHandler.instance.ToggleBlink(2); //Blink the wave
             if(!ScenesManager.instance.IsSwapped()){
                 TutorialPanelManager.instance.ToggleTutorialHand(8);
             }else{
                 TutorialPanelManager.instance.ToggleTutorialHand(9);
             } 
+           
+            break;
+
+            case 5:
             runTutorial = false; 
             Debug.Log("TUTORIAL TERMINATO");
             break;
@@ -125,6 +133,10 @@ public class TutorialManager : MonoBehaviour
                 TutorialPanelManager.instance.ToggleTutorialHand(9);
             } 
             break;
+        case 4:
+            TutorialPanelManager.instance.ToggleTutorialPanel(4);
+            break;
+        
         
 }
 			

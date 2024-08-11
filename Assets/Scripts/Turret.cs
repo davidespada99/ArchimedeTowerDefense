@@ -27,6 +27,7 @@ public class Turret : MonoBehaviour
     private float timeUntilFire;
     private Transform target;
 
+    private static bool firstTurretClicked = false; //Varaible to check for the tutorial if the first turret has been clicked to show or not the popup
     private int cost;
 
 //     private void OnDrawGizmosSelected(){
@@ -99,15 +100,26 @@ public class Turret : MonoBehaviour
     void OnMouseDown()
     {
         // Perform your action here
-        Debug.Log("My turret cost is " + cost + ". I will sell it for " + cost/2);
 
+        if(TutorialManager.instance.GetState() < 4) return;
+        
+        if(!TutorialManager.firstTurretClicked) {   
+            
+            
+            TutorialManager.instance.RunTutorialStep();
+            TutorialManager.firstTurretClicked = true;
+        }
+
+
+        // Handle the sell/upgrade panel
+        Debug.Log("My turret cost is " + cost + ". I will sell it for " + cost/2);
+        LevelManager.main.PauseGame();
+
+
+        /*  ========== TO DECOMMENT 
         LevelManager.main.IncreaseCurrency( (int)(cost / 2));
         Destroy(gameObject);   
-        // Example action: move the object
-        // transform.position = new Vector3(0, 10, 0);
-        
-        // Example action: play a sound
-        // GetComponent<AudioSource>().Play();
-    }
+        */
+        }
 
 }
