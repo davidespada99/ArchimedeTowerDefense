@@ -69,6 +69,10 @@ public class Turret : MonoBehaviour
     public void SetCost(int cost){
         this.cost = cost;
     }
+
+    public int GetCost(){
+        return cost;
+    }
         
     private void RotateTowardsTarget(){
         float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -104,22 +108,18 @@ public class Turret : MonoBehaviour
         if(TutorialManager.instance.GetState() < 4) return;
         
         if(!TutorialManager.firstTurretClicked) {   
-            
-            
             TutorialManager.instance.RunTutorialStep();
             TutorialManager.firstTurretClicked = true;
+        }else{
+            Debug.Log("My turret cost is " + cost + ". I will sell it for " + cost/2);
+            SellPanelManager.main?.SetTurret(gameObject);
+            SellPanelManager.main?.Pause();
+        }
+            
         }
 
+    public void Sell(){
 
-        // Handle the sell/upgrade panel
-        Debug.Log("My turret cost is " + cost + ". I will sell it for " + cost/2);
-        LevelManager.main.PauseGame();
-
-
-        /*  ========== TO DECOMMENT 
-        LevelManager.main.IncreaseCurrency( (int)(cost / 2));
-        Destroy(gameObject);   
-        */
-        }
+    }
 
 }
