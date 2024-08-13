@@ -16,6 +16,8 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private Transform firingPoint;
 
+    
+
 
     [Header("Attributes")]
 
@@ -108,6 +110,7 @@ public class Turret : MonoBehaviour
         if(TutorialManager.instance.GetState() < 4) return;
         
         if(!TutorialManager.firstTurretClicked) {   
+            SellPanelManager.main?.SetTurret(gameObject);
             TutorialManager.instance.RunTutorialStep();
             TutorialManager.firstTurretClicked = true;
         }else{

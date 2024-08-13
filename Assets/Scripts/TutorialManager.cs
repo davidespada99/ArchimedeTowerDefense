@@ -55,34 +55,37 @@ public class TutorialManager : MonoBehaviour
         state++;
 
         switch(state){
-            case 1: BlinkHandler.instance.ToggleBlink(0); // Blink the health
-            if(!ScenesManager.instance.IsSwapped()){
-                TutorialPanelManager.instance.ToggleTutorialHand(4);
-            }else{
-                TutorialPanelManager.instance.ToggleTutorialHand(5);
-            }
+            case 1: 
+                BlinkHandler.instance.ToggleBlink(0); // Blink the health
+                if(!ScenesManager.instance.IsSwapped()){
+                    TutorialPanelManager.instance.ToggleTutorialHand(4);
+                }else{
+                    TutorialPanelManager.instance.ToggleTutorialHand(5);
+                }
             break;
-            case 3: BlinkHandler.instance.ToggleBlink(1);    //Blink the coin
-            if(!ScenesManager.instance.IsSwapped()){
-                TutorialPanelManager.instance.ToggleTutorialHand(6);
-            }else{
-                TutorialPanelManager.instance.ToggleTutorialHand(7);
-            } 
-            break;
-            
-            case 4: BlinkHandler.instance.ToggleBlink(2); //Blink the wave
-            if(!ScenesManager.instance.IsSwapped()){
-                TutorialPanelManager.instance.ToggleTutorialHand(8);
-            }else{
-                TutorialPanelManager.instance.ToggleTutorialHand(9);
-            } 
+            case 3: 
+                BlinkHandler.instance.ToggleBlink(1);    //Blink the coin
+                if(!ScenesManager.instance.IsSwapped()){
+                    TutorialPanelManager.instance.ToggleTutorialHand(6);
+                }else{
+                    TutorialPanelManager.instance.ToggleTutorialHand(7);
+                } 
+                break;
+            case 4: 
+                BlinkHandler.instance.ToggleBlink(2); //Blink the wave
+                if(!ScenesManager.instance.IsSwapped()){
+                    TutorialPanelManager.instance.ToggleTutorialHand(8);
+                }else{
+                    TutorialPanelManager.instance.ToggleTutorialHand(9);
+                } 
            
-            break;
+                break;
 
             case 5:
-            runTutorial = false; 
-            Debug.Log("TUTORIAL TERMINATO");
-            break;
+                SellPanelManager.main.Pause();
+                runTutorial = false; 
+                Debug.Log("TUTORIAL TERMINATO");
+                break;
             
         }
 

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class SellPanelManager : MonoBehaviour
 {
     public static SellPanelManager main;
     private GameObject turret; 
     public GameObject SellMenu;
     public GameObject Mask;
-
+    public TextMeshProUGUI costText;
     
 
     private void Awake(){
@@ -31,6 +31,7 @@ public class SellPanelManager : MonoBehaviour
     public void Pause()
     {
         SoundManager.Instance.PlayEffects("Button_Sound");
+        costText.text = "Sell for: " + turret.GetComponent<Turret>().GetCost() / 2;
         SellMenu.SetActive(true);
         Mask.SetActive(true);
         Time.timeScale = 0; // Pauses the game
