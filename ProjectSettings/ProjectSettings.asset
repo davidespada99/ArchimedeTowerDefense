@@ -139,8 +139,11 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 1.0.6
-  preloadedAssets: []
+  bundleVersion: 1.0.8
+  preloadedAssets:
+  - {fileID: 2888997667000519160, guid: cc5907449e64eea4f93a8a25e59e5fa5, type: 2}
+  - {fileID: 11400000, guid: ed5b8d8f47021b0439067ffb83ce074e, type: 2}
+  - {fileID: 11400000, guid: 5a6259452e7cc5540a6bc5673b17afe4, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -929,11 +932,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 4f1ccba1-dc99-44d9-a2e5-3da1e77039a2
+  cloudProjectId: 7c7d4820-0990-40fe-9bc9-a5f1104c5bc6
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Archimede Tower Defense (1)
-  organizationId: mircoloo
+  organizationId: spadads
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

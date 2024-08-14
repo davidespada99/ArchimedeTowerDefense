@@ -31,7 +31,7 @@ public class SellPanelManager : MonoBehaviour
     public void Pause()
     {
         SoundManager.Instance.PlayEffects("Button_Sound");
-        costText.text = "Sell for: " + turret.GetComponent<Turret>().GetCost() / 2;
+        costText.text = "SELL FOR: \n" + turret.GetComponent<Turret>().GetCost() / 2;
         SellMenu.SetActive(true);
         Mask.SetActive(true);
         Time.timeScale = 0; // Pauses the game
